@@ -1,0 +1,9 @@
+__pycache__/
+*.pyc
+venv/
+fastapi_env/
+.env
+.idea/
+.vscode/
+*.log
+*.db

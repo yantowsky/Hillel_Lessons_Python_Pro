@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Додати криптомонету</h2>
+
+<form method="post" action="/add">
+    <label>Назва монети:</label><br>
+    <input type="text" name="name" required><br><br>
+
+    <label>Символ Binance (наприклад BTCUSDT, ETHUSDT, SOLUSDT):</label><br>
+    <input type="text" name="symbol" required><br><br>
+
+    <button type="submit">Додати</button>
+</form>
+{% endblock %}

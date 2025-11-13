@@ -1,0 +1,6 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>{{ coin.name }} ({{ coin.symbol }})</h2>
+<p><strong>Поточна ціна:</strong> {{ "%.2f"|format(price) if price else "N/A" }} USDT</p>
+<a href="/">⬅ Назад</a>
+{% endblock %}

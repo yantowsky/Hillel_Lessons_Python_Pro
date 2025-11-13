@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Ваші монети з Binance</h2>
+
+{% if coins %}
+<table>
+    <tr>
+        <th>Назва</th>
+        <th>Символ</th>
+        <th>Ціна (USDT)</th>
+    </tr>
+    {% for c in coins %}
+    <tr>
+        <td><a href="/coin/{{ c.id }}">{{ c.name }}</a></td>
+        <td>{{ c.symbol }}</td>
+        <td>{{ "%.2f"|format(c.price) if c.price else "N/A" }}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% else %}
+<p>Поки що немає монет 😔</p>
+{% endif %}
+{% endblock %}
