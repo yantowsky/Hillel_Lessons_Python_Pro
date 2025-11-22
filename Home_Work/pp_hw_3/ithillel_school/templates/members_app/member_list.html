@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Список учасників</h2>
+
+<ul>
+    {% for member in members %}
+        <li>
+            {{ member.name }} — {{ member.email }}  
+            (Курс: {{ member.course.title }})
+        </li>
+    {% empty %}
+        <p>Учасників нема</p>
+    {% endfor %}
+</ul>
+{% endblock %}
