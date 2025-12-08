@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Список курсів</h2>
+
+<ul>
+    {% for course in courses %}
+    <li style="margin-bottom: 20px;">
+        <b>{{ course.title }}</b><br>
+        {{ course.description }}<br>
+        <b>Учасники ({{ course.members.count }}):</b>
+
+        {% if course.members.all %}
+        <ul>
+            {% for member in course.members.all %}
+            <li>{{ member.name }} — {{ member.email }}</li>
+            {% empty %}
+            <li>Немає учасників</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+    </li>
+    {% empty %}
+    <p>Курсів нема</p>
+    {% endfor %}
+</ul>
+
+{% endblock %}
+
