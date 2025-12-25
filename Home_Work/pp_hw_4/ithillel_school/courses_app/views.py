@@ -1,6 +1,10 @@
 from django.shortcuts import render, redirect
 from .models import Course
 from .forms import CourseForm
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework.permissions import IsAuthenticated
+from auth_app.authentication import JWTAuthentication
 
 
 def course_list(request):
@@ -18,3 +22,14 @@ def create_course(request):
         form = CourseForm()
 
     return render(request, "courses_app/create_course.html", {"form": form})
+
+
+class CourseListAPI(APIView):
+    authentication_classes = [JWTAuthentication]
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        return Response({
+            'message': 'Authorized access',
+            'user': request.user.username
+        })

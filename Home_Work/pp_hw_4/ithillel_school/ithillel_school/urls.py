@@ -7,4 +7,7 @@ urlpatterns = [
     path('', home, name='home'),
     path('courses/', include('courses_app.urls')),
     path('members/', include('members_app.urls')),
+    path('api/', include('courses_app.urls')),
+    path('api/auth/', include('auth_app.urls')),
+
 ]

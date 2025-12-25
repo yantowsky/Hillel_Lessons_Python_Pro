@@ -1,4 +1,6 @@
 asgiref==3.11.0
 Django==6.0
+djangorestframework==3.16.1
+PyJWT==2.10.1
 sqlparse==0.5.4
 tzdata==2025.2
