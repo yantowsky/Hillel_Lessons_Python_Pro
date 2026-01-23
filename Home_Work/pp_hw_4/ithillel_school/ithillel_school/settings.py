@@ -20,6 +20,81 @@ from datetime import timedelta
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+
+    # 🔹 ФІЛЬТРИ
+    'filters': {
+        'require_debug_true': {
+            '()': 'django.utils.log.RequireDebugTrue',
+        },
+        'require_debug_false': {
+            '()': 'django.utils.log.RequireDebugFalse',
+        },
+    },
+
+    # 🔹 ФОРМАТИ
+    'formatters': {
+        'verbose': {
+            'format': '{levelname} {asctime} {name} {message}',
+            'style': '{',
+        },
+        'simple': {
+            'format': '{levelname} {message}',
+            'style': '{',
+        },
+    },
+
+    # 🔹 HANDLERS
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+            'filters': ['require_debug_true'],
+            'formatter': 'simple',
+        },
+
+        'file_info': {
+            'class': 'logging.FileHandler',
+            'level': 'INFO',
+            'filename': os.path.join(BASE_DIR, 'logs/info.log'),
+            'formatter': 'verbose',
+        },
+
+        'file_error': {
+            'class': 'logging.FileHandler',
+            'level': 'ERROR',
+            'filename': os.path.join(BASE_DIR, 'logs/error.log'),
+            'formatter': 'verbose',
+        },
+    },
+
+    # 🔹 LOGGERS
+    'loggers': {
+
+        # Django core
+        'django': {
+            'handlers': ['console', 'file_info'],
+            'level': 'INFO',
+            'propagate': True,
+        },
+
+        # HTTP errors (500, 404)
+        'django.request': {
+            'handlers': ['file_error'],
+            'level': 'ERROR',
+            'propagate': False,
+        },
+
+        # Твій застосунок
+        'app': {
+            'handlers': ['console', 'file_info', 'file_error'],
+            'level': 'DEBUG',
+            'propagate': False,
+        },
+    }
+}
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
