@@ -24,7 +24,7 @@ LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
 
-    # 🔹 ФІЛЬТРИ
+    # FILTERS
     'filters': {
         'require_debug_true': {
             '()': 'django.utils.log.RequireDebugTrue',
@@ -34,7 +34,7 @@ LOGGING = {
         },
     },
 
-    # 🔹 ФОРМАТИ
+    # FORMATTERS
     'formatters': {
         'verbose': {
             'format': '{levelname} {asctime} {name} {message}',
@@ -86,7 +86,7 @@ LOGGING = {
             'propagate': False,
         },
 
-        # Твій застосунок
+        # My app
         'app': {
             'handlers': ['console', 'file_info', 'file_error'],
             'level': 'DEBUG',
