@@ -46,7 +46,7 @@ LOGGING = {
         },
     },
 
-    # 🔹 HANDLERS
+    # HANDLERS
     'handlers': {
         'console': {
             'class': 'logging.StreamHandler',
@@ -69,7 +69,7 @@ LOGGING = {
         },
     },
 
-    # 🔹 LOGGERS
+    # LOGGERS
     'loggers': {
 
         # Django core
