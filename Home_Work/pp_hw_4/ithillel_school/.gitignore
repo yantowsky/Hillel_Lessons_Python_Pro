@@ -9,4 +9,4 @@ venv/
 .log/
 postgres_data/
 .migrations/
-.DS_Store
+**/.DS_Store
