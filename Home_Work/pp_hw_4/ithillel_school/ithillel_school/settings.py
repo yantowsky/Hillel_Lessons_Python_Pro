@@ -15,10 +15,11 @@ import os
 from pathlib import Path
 from datetime import timedelta
 
-# from datetime import timedelta
-
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+LOG_DIR = Path(BASE_DIR) / "logs"
+LOG_DIR.mkdir(exist_ok=True)
 
 LOGGING = {
     'version': 1,
@@ -99,10 +100,13 @@ LOGGING = {
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-w=7h0^uo3dox-it7k^f8&5)qmc^k!)ts#!l$jq94gfb2@nh+n0'
+SECRET_KEY = os.getenv('SECRET_KEY')
+
+if not SECRET_KEY:
+    raise RuntimeError('SECRET_KEY is not set')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-# DEBUG = True
+DEBUG = os.getenv('DEBUG', '1') == '1'
 
 ALLOWED_HOSTS = []
 
@@ -204,7 +208,7 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 JWT_SETTINGS = {
-    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=5),  # 🔴 дефолт 5 хв
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=5),
     'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
     'ALGORITHM': 'HS256',
     'SIGNING_KEY': SECRET_KEY,
@@ -218,6 +222,3 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.IsAuthenticated',
     ],
 }
-
-SECRET_KEY = os.getenv('SECRET_KEY')
-DEBUG = os.getenv('DEBUG') == '1'

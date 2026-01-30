@@ -6,4 +6,7 @@ venv/
 .idea/
 .vscode/
 *.log
+.log/
 postgres_data/
+.migrations/
+.DS_Store
